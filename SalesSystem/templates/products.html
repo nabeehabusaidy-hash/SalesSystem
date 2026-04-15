@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<div class="topbar">
+    <h1>📦 Products</h1>
+</div>
+{% if success %}<div class="success">{{ success }}</div>{% endif %}
+<div class="box">
+    <h3>Add New Product</h3>
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" name="name" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" placeholder="Enter description">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Price (TSH)</label>
+                <input type="number" name="price" placeholder="Enter price" required>
+            </div>
+            <div class="form-group">
+                <label>Quantity in Stock</label>
+                <input type="number" name="quantity" placeholder="Enter quantity" required>
+            </div>
+        </div>
+        <button class="btn" type="submit">Add Product</button>
+    </form>
+</div>
+<div class="box">
+    <h3>All Products</h3>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchTable()">
+    </div>
+    <table id="productsTable">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price (TSH)</th>
+            <th>Stock</th>
+            <th>Action</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product[0] }}</td>
+            <td>{{ product[1] }}</td>
+            <td>{{ product[2] }}</td>
+            <td>{{ product[3] }}</td>
+            <td><span class="badge {% if product[4] < 5 %}badge-red{% else %}badge-green{% endif %}">{{ product[4] }}</span></td>
+            <td><a href="/delete_product/{{ product[0] }}" class="btn" style="background:#e94560;padding:6px 12px;font-size:12px" onclick="return confirm('Delete?')">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<script>
+function searchTable(){
+    let input=document.getElementById('searchInput').value.toLowerCase();
+    let rows=document.getElementById('productsTable').getElementsByTagName('tr');
+    for(let i=1;i<rows.length;i++){
+        let text=rows[i].innerText.toLowerCase();
+        rows[i].style.display=text.includes(input)?'':'none';
+    }
+}
+</script>
+{% endblock %}

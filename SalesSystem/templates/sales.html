@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Sales{% endblock %}
+{% block content %}
+<div class="topbar">
+    <h1>🛒 Sales</h1>
+</div>
+{% if success %}<div class="success">{{ success }}</div>{% endif %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<div class="box">
+    <h3>Record New Sale</h3>
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Customer</label>
+                <select name="customer_id" required>
+                    <option value="">Select Customer</option>
+                    {% for customer in customers %}
+                    <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Product</label>
+                <select name="product_id" required>
+                    <option value="">Select Product</option>
+                    {% for product in products %}
+                    <option value="{{ product[0] }}">{{ product[1] }} - TSH {{ product[3] }} (Stock: {{ product[4] }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" placeholder="Enter quantity" required>
+            </div>
+        </div>
+        <button class="btn" type="submit">Record Sale</button>
+    </form>
+</div>
+<div class="box">
+    <h3>Sales History</h3>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search sales..." onkeyup="searchTable()">
+        <button class="btn btn-blue" onclick="window.print()">🖨️ Print</button>
+    </div>
+    <table id="salesTable">
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total (TSH)</th>
+            <th>Date</th>
+            <th>Invoice</th>
+        </tr>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ sale[0] }}</td>
+            <td>{{ sale[1] }}</td>
+            <td>{{ sale[2] }}</td>
+            <td>{{ sale[3] }}</td>
+            <td>{{ sale[4] }}</td>
+            <td>{{ sale[5] }}</td>
+            <td><a href="/invoice/{{ sale[0] }}" class="btn btn-green" style="padding:6px 12px;font-size:12px">🧾 Invoice</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<script>
+function searchTable(){
+    let input=document.getElementById('searchInput').value.toLowerCase();
+    let rows=document.getElementById('salesTable').getElementsByTagName('tr');
+    for(let i=1;i<rows.length;i++){
+        let text=rows[i].innerText.toLowerCase();
+        rows[i].style.display=text.includes(input)?'':'none';
+    }
+}
+</script>
+{% endblock %}

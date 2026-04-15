@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="topbar">
+    <h1>📊 Dashboard</h1>
+    <span style="color:#aaa;font-size:14px">Welcome back, Admin! 👋</span>
+</div>
+<div class="cards">
+    <div class="card blue">
+        <h2>{{ total_sales }}</h2>
+        <p>Total Sales</p>
+    </div>
+    <div class="card green">
+        <h2>{{ total_customers }}</h2>
+        <p>Total Customers</p>
+    </div>
+    <div class="card orange">
+        <h2>{{ total_products }}</h2>
+        <p>Total Products</p>
+    </div>
+    <div class="card red">
+        <h2>{{ total_revenue }}</h2>
+        <p>Revenue (TSH)</p>
+    </div>
+</div>
+<div class="box">
+    <h3>🕐 Recent Sales</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total (TSH)</th>
+            <th>Date</th>
+        </tr>
+        {% for sale in recent_sales %}
+        <tr>
+            <td>{{ sale[0] }}</td>
+            <td>{{ sale[1] }}</td>
+            <td>{{ sale[2] }}</td>
+            <td>{{ sale[3] }}</td>
+            <td>{{ sale[4] }}</td>
+            <td>{{ sale[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

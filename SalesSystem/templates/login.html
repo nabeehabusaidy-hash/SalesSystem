@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+body{background:#f0f2f5;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;margin:0}
+.box{background:white;padding:40px;border-radius:10px;width:380px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+h2{text-align:center;color:#2c3e50}
+p{text-align:center;color:#7f8c8d;margin-bottom:30px}
+.fg{margin-bottom:20px}
+label{display:block;margin-bottom:6px;font-weight:bold}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box}
+.btn{width:100%;padding:13px;background:#2c3e50;color:white;border:none;border-radius:6px;font-size:16px;cursor:pointer}
+.error{background:#ffe0e0;color:#e74c3c;padding:10px;border-radius:6px;margin-bottom:15px;text-align:center}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Sales System</h2>
+<p>Please login to continue</p>
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+<form method="POST">
+<div class="fg">
+<label>Username</label>
+<input type="text" name="username" placeholder="Enter username" required>
+</div>
+<div class="fg">
+<label>Password</label>
+<input type="password" name="password" placeholder="Enter password" required>
+</div>
+<button class="btn" type="submit">Login</button>
+</form>
+</div>
+</body>
+</html>

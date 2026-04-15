@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<div class="topbar">
+    <h1>📄 Reports</h1>
+    <button class="btn btn-blue" onclick="window.print()">🖨️ Print Report</button>
+</div>
+<div class="cards">
+    <div class="card blue">
+        <h2>{{ total_sales }}</h2>
+        <p>Total Sales</p>
+    </div>
+    <div class="card green">
+        <h2>{{ total_customers }}</h2>
+        <p>Total Customers</p>
+    </div>
+    <div class="card orange">
+        <h2>{{ total_products }}</h2>
+        <p>Total Products</p>
+    </div>
+    <div class="card red">
+        <h2>{{ total_revenue }}</h2>
+        <p>Total Revenue (TSH)</p>
+    </div>
+</div>
+<div class="box">
+    <h3>🏆 Best Selling Products</h3>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Total Sold</th>
+            <th>Revenue (TSH)</th>
+        </tr>
+        {% for product in best_products %}
+        <tr>
+            <td>{{ product[0] }}</td>
+            <td>{{ product[1] }}</td>
+            <td>{{ product[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="box">
+    <h3>👥 Top Customers</h3>
+    <table>
+        <tr>
+            <th>Customer</th>
+            <th>Total Purchases</th>
+            <th>Total Spent (TSH)</th>
+        </tr>
+        {% for customer in top_customers %}
+        <tr>
+            <td>{{ customer[0] }}</td>
+            <td>{{ customer[1] }}</td>
+            <td>{{ customer[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="box">
+    <h3>📋 All Sales History</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total (TSH)</th>
+            <th>Date</th>
+        </tr>
+        {% for sale in all_sales %}
+        <tr>
+            <td>{{ sale[0] }}</td>
+            <td>{{ sale[1] }}</td>
+            <td>{{ sale[2] }}</td>
+            <td>{{ sale[3] }}</td>
+            <td>{{ sale[4] }}</td>
+            <td>{{ sale[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Sales System{% endblock %}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#1a1a2e;color:#eee;display:flex;min-height:100vh}
+.sidebar{width:240px;background:#16213e;padding:20px;position:fixed;height:100vh;overflow-y:auto}
+.sidebar .logo{text-align:center;padding:20px 0;border-bottom:1px solid #0f3460;margin-bottom:20px}
+.sidebar .logo h2{color:#e94560;font-size:18px}
+.sidebar .logo p{color:#aaa;font-size:12px;margin-top:5px}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:12px 15px;color:#aaa;text-decoration:none;border-radius:8px;margin-bottom:5px;font-size:14px;transition:all 0.3s}
+.sidebar a:hover,.sidebar a.active{background:#0f3460;color:white}
+.sidebar .logout{position:absolute;bottom:20px;width:200px}
+.sidebar .logout a{color:#e94560}
+.main{margin-left:240px;flex:1;padding:30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.topbar h1{font-size:22px;color:white}
+.cards{display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.card{background:#16213e;padding:25px;border-radius:12px;flex:1;min-width:180px;text-align:center;border:1px solid #0f3460}
+.card h2{font-size:38px;margin-bottom:8px;font-weight:700}
+.card p{color:#aaa;font-size:13px}
+.card.blue h2{color:#3498db}
+.card.green h2{color:#2ecc71}
+.card.orange h2{color:#e67e22}
+.card.red h2{color:#e94560}
+.box{background:#16213e;padding:25px;border-radius:12px;margin-bottom:25px;border:1px solid #0f3460}
+.box h3{margin-bottom:20px;color:white;font-size:16px}
+.form-row{display:flex;gap:15px;flex-wrap:wrap}
+.form-group{flex:1;min-width:200px;margin-bottom:15px}
+label{display:block;margin-bottom:6px;color:#aaa;font-size:13px}
+input,select{width:100%;padding:10px 12px;background:#0f3460;border:1px solid #1a4a8a;border-radius:8px;color:white;font-size:14px;box-sizing:border-box}
+input::placeholder{color:#666}
+input:focus,select:focus{outline:none;border-color:#e94560}
+select option{background:#0f3460}
+.btn{padding:10px 20px;background:#e94560;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+.btn:hover{background:#c0392b}
+.btn-blue{background:#3498db}
+.btn-blue:hover{background:#2980b9}
+.btn-green{background:#2ecc71;color:#1a1a2e}
+.btn-green:hover{background:#27ae60}
+table{width:100%;border-collapse:collapse}
+th{background:#0f3460;color:#aaa;padding:12px;text-align:left;font-size:13px;font-weight:600}
+td{padding:12px;border-bottom:1px solid #0f3460;font-size:14px;color:#ddd}
+tr:hover td{background:#0f3460}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.badge-green{background:#1a4a2e;color:#2ecc71}
+.badge-red{background:#4a1a1a;color:#e94560}
+.success{background:#1a4a2e;color:#2ecc71;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-size:14px}
+.error{background:#4a1a1a;color:#e94560;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-size:14px}
+.search-bar{display:flex;gap:10px;margin-bottom:20px}
+.search-bar input{max-width:300px}
+@media print{.sidebar,.btn,.search-bar{display:none}.main{margin:0}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <h2>📊 Sales MS</h2>
+        <p>Management System</p>
+    </div>
+    <a href="/dashboard" {% if request.path=='/dashboard' %}class="active"{% endif %}>📊 Dashboard</a>
+    <a href="/customers" {% if request.path=='/customers' %}class="active"{% endif %}>👥 Customers</a>
+    <a href="/products" {% if request.path=='/products' %}class="active"{% endif %}>📦 Products</a>
+    <a href="/sales" {% if request.path=='/sales' %}class="active"{% endif %}>🛒 Sales</a>
+    <a href="/reports" {% if request.path=='/reports' %}class="active"{% endif %}>📄 Reports</a>
+    <div class="logout">
+        <a href="/logout">🚪 Logout</a>
+    </div>
+</div>
+<div class="main">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

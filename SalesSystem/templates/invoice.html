@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Invoice</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:white;padding:40px;color:#333}
+.invoice{max-width:700px;margin:0 auto;border:1px solid #ddd;padding:40px;border-radius:10px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;border-bottom:2px solid #2c3e50;padding-bottom:20px}
+.header h1{color:#2c3e50;font-size:28px}
+.header p{color:#aaa;font-size:13px}
+.invoice-info{display:flex;justify-content:space-between;margin-bottom:30px}
+.invoice-info div p{margin-bottom:5px;font-size:14px}
+.invoice-info div p span{font-weight:bold}
+table{width:100%;border-collapse:collapse;margin-bottom:30px}
+th{background:#2c3e50;color:white;padding:12px;text-align:left}
+td{padding:12px;border-bottom:1px solid #eee}
+.total{text-align:right;font-size:18px;font-weight:bold;color:#2c3e50}
+.footer{text-align:center;color:#aaa;font-size:12px;margin-top:30px;border-top:1px solid #eee;padding-top:20px}
+.btn{padding:10px 20px;background:#2c3e50;color:white;border:none;border-radius:6px;cursor:pointer;margin-right:10px}
+@media print{.btn{display:none}}
+</style>
+</head>
+<body>
+<div class="invoice">
+    <div class="header">
+        <div>
+            <h1>📊 Sales System</h1>
+            <p>UNIQUE ACADEMY</p>
+        </div>
+        <div style="text-align:right">
+            <h2 style="color:#e74c3c">INVOICE</h2>
+            <p style="color:#aaa">Invoice #{{ sale[0] }}</p>
+            <p style="color:#aaa">{{ sale[5] }}</p>
+        </div>
+    </div>
+    <div class="invoice-info">
+        <div>
+            <p><span>Customer:</span> {{ sale[1] }}</p>
+        </div>
+        <div style="text-align:right">
+            <p><span>Date:</span> {{ sale[5] }}</p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total (TSH)</th>
+        </tr>
+        <tr>
+            <td>{{ sale[2] }}</td>
+            <td>{{ sale[3] }}</td>
+            <td>{{ sale[4] }}</td>
+        </tr>
+    </table>
+    <div class="total">Total Amount: TSH {{ sale[4] }}</div>
+    <div class="footer">
+        <p>Thank you for your business!</p>
+        <p>UNIQUE ACADEMY - Sales Management System</p>
+    </div>
+</div>
+<br>
+<button class="btn" onclick="window.print()">🖨️ Print Invoice</button>
+<button class="btn" onclick="window.history.back()">← Back</button>
+</body>
+</html>
